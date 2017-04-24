@@ -12,10 +12,10 @@ namespace ASP.MVC_2017.Models.Entities
         public DateTime DateOfCreation { get; set; }
         public string Text { get; set; }
 
-        public string ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
         public Wall()
         {
             Comments = new List<Comment>();
