@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ASP.MVC_2017.Models
@@ -104,4 +105,5 @@ namespace ASP.MVC_2017.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
 }

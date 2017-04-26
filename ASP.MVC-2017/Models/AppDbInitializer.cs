@@ -17,7 +17,7 @@ namespace ASP.MVC_2017.Models
             // создаем две роли
             var role1 = new IdentityRole { Name = "admin" };
             var role2 = new IdentityRole { Name = "user" };
-
+            
             // добавляем роли в бд
             roleManager.Create(role1);
             roleManager.Create(role2);

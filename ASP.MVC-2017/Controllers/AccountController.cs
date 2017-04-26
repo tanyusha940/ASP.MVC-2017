@@ -149,11 +149,11 @@ namespace ASP.MVC_2017.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) 
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.UserName + "@gmail.com", RegistrationDate = DateTime.Now,NumberOfInvitations = 5};
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.UserName + "@gmail.com", RegistrationDate = DateTime.Now, NumberOfInvitations = 5};
                 var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (result.Succeeded) 
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 

@@ -1,0 +1,29 @@
+﻿@using ASP.MVC_2017.Models.Entities
+@model IEnumerable<Wall> 
+@{
+    ViewBag.Title = "AddWall";
+}
+<h2>Заполните стену </h2>
+
+<h2>AddWall</h2>
+
+@using (Html.BeginForm("CreateWall", "Home", FormMethod.Post))
+{
+    
+    <table>
+        <tr>
+            <td><p>Введите заголовок: </p></td>
+            <td><input type="text" name="Title" /> </td>
+        </tr>
+        <tr>
+            <td><p>Введите текст: </p></td>
+            <td><input type="text" name="Text" /> </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Save" /> </td>
+            <td></td>
+        </tr>
+    </table>
+}
+
+
