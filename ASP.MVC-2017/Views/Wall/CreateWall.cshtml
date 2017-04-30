@@ -1,13 +1,11 @@
-﻿@using ASP.MVC_2017.Models.Entities
-@model IEnumerable<Wall> 
-@{
+﻿@{
     ViewBag.Title = "AddWall";
 }
 <h2>Заполните стену </h2>
 
 <h2>AddWall</h2>
 
-@using (Html.BeginForm("CreateWall", "Home", FormMethod.Post))
+@using (Html.BeginForm("CreateWall", "Wall", FormMethod.Post))
 {
     
     <table>

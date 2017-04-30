@@ -1,0 +1,35 @@
+﻿@using ASP.MVC_2017.Models.Entities
+@model IEnumerable<Wall> 
+@{ 
+    ViewBag.Title = "Стены";
+}
+<h2> Стены </h2>
+
+<table border="1" width="100%" cellpadding="5">
+
+            @foreach (var wall in Model)
+            {
+                <tr>
+                    <th>
+                        @Html.DisplayFor(w => wall.Title)<br>
+
+                        @Html.DisplayFor(w => wall.DateOfCreation)<br>
+                        @Html.DisplayFor(w => wall.User.UserName)<br>
+
+                        @Html.DisplayFor(w => wall.Text)
+                    </th>
+                    @foreach (var comment in wall.Comments)
+                    {
+                    <tr>
+                        <th>
+                            @Html.DisplayFor(c => comment.Value)<br>
+
+                            @Html.DisplayFor(c => comment.Date)<br>
+                            @Html.DisplayFor(c => comment.User.UserName)<br>
+                        </th>
+                    </tr>
+                    }
+                </tr>
+        }
+</table>
+
