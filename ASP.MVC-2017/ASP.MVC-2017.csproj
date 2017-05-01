@@ -272,6 +272,7 @@
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Wall\CreateWall.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Wall\GetUserWalls.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

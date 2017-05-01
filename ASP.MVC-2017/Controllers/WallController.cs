@@ -25,12 +25,24 @@ namespace ASP.MVC_2017.Controllers
             var walls = _wallRepository.GetAllWalls();
             return View(walls);
         }
-
+        [Authorize]
+        public ActionResult GetUserWalls()
+        {
+            var walls = _wallRepository.GetUserWalls(User.Identity.GetUserId());
+            return View(walls);
+        }
+        [Authorize]
+        public ActionResult DeleteWall(int wallId)
+        {
+            _wallRepository.DeleteWall(wallId);
+            return RedirectToAction("GetUserWalls", "Wall");
+        }
+        [Authorize]
         public ActionResult CreateWall()
         {
             return View();
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult CreateWall(CreateWallViewModel model)
         {

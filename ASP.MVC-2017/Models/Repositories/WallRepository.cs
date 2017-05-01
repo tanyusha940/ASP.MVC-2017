@@ -35,6 +35,21 @@ namespace ASP.MVC_2017.Models.Repositories
         {
             return context.Walls.ToList();
         }
+
+        public List<Wall> GetUserWalls(string userId)
+        {
+            return context.Walls.Where(w => w.UserId == userId).ToList();
+        }
+
+        public void DeleteWall(int id)
+        {
+            var wall = context.Walls.Where(w => w.Id == id).FirstOrDefault();
+            if (wall != null)
+            {
+                context.Walls.Remove(wall);
+                context.SaveChanges();
+            }
+        }
         
         public void CreateWall(CreateWallViewModel model, string userId)
         {
