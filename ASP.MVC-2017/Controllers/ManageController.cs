@@ -7,17 +7,20 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ASP.MVC_2017.Models;
+using ASP.MVC_2017.Models.Repositories;
 
 namespace ASP.MVC_2017.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
+        private readonly UserRepository _userRepository;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public ManageController()
         {
+            _userRepository = new UserRepository();
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -64,15 +67,14 @@ namespace ASP.MVC_2017.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
-            {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
-            return View(model);
+            var viewModel = _userRepository.GetUserInformation(userId);
+            viewModel.HasPassword = HasPassword();
+            viewModel.PhoneNumber = await UserManager.GetPhoneNumberAsync(userId);
+            viewModel.TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId);
+            viewModel.Logins = await UserManager.GetLoginsAsync(userId);
+            viewModel.BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId);
+
+            return View(viewModel);
         }
 
         //

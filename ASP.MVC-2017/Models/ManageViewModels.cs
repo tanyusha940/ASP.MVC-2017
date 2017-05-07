@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System;
 
 namespace ASP.MVC_2017.Models
 {
@@ -12,6 +13,9 @@ namespace ASP.MVC_2017.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public DateTime? RegistrationDate { get; set; }
+        public int NumberOfWalls { get; set; }
+        public int NumberOfComments { get; set; }
     }
 
     public class ManageLoginsViewModel

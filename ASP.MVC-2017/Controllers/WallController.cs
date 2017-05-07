@@ -11,7 +11,6 @@ namespace ASP.MVC_2017.Controllers
 {
     public class WallController : Controller
     {
-        ApplicationDbContext context = new ApplicationDbContext();
         private readonly WallRepository _wallRepository;
 
         public WallController()

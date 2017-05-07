@@ -13,8 +13,6 @@ namespace ASP.MVC_2017.Models
     public class ApplicationUser : IdentityUser
     {
         public DateTime? RegistrationDate { get; set; }
-        public int NumberOfWalls { get; set; }
-        public int NumberOfComments { get; set; }
         public int NumberOfInvitations { get; set; }
         public ICollection<Wall> Walls { get; set; }
         public ICollection<Comment> Comments { get; set; }

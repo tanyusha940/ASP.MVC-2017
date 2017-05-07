@@ -23,7 +23,7 @@ namespace ASP.MVC_2017.Models
             roleManager.Create(role2);
 
             // создаем пользователей
-            var user = new ApplicationUser { Email = "test@mail.ru", UserName = "test", Id = "ba47eb41-7d0a-4012-8023-4418ced312c3", EmailConfirmed = true, RegistrationDate = DateTime.Now.AddMonths(-1), NumberOfWalls = 1, NumberOfComments = 4 };
+            var user = new ApplicationUser { Email = "test@mail.ru", UserName = "test", Id = "ba47eb41-7d0a-4012-8023-4418ced312c3", EmailConfirmed = true, RegistrationDate = DateTime.Now.AddMonths(-1) };
             string password = "Qwerty_1234";
             var result = userManager.Create(user, password);
 
