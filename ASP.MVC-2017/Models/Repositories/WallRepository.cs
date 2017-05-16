@@ -63,5 +63,23 @@ namespace ASP.MVC_2017.Models.Repositories
             context.Walls.Add(wall_1);
             context.SaveChanges();
         }
+
+        public void AddComment(string value, string userId, int wallId)
+        {
+            var wall = context.Walls.Where(w => w.Id == wallId).FirstOrDefault();
+            if(wall != null)
+            {
+                Comment comment = new Comment
+                {
+                    Date = DateTime.Now,
+                    UserId = userId,
+                    Value = value
+                };
+
+                wall.Comments.Add(comment);
+                context.SaveChanges();
+            }
+           
+        }
     }
 }

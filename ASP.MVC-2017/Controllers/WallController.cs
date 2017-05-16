@@ -48,6 +48,12 @@ namespace ASP.MVC_2017.Controllers
             _wallRepository.CreateWall(model, User.Identity.GetUserId());
             return RedirectToAction("Index");
         }
+        [Authorize]
+        [HttpPost]
+        public void AddComment(string comment, int wallId)
+        {
+           _wallRepository.AddComment(comment, User.Identity.GetUserId(),wallId);
+        }
 
     }
 }

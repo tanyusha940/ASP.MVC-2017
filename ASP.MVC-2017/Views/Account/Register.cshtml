@@ -1,43 +1,53 @@
 ﻿@model ASP.MVC_2017.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Регистрация";
 }
 
-<h2>Регистрация</h2>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div>
-        <h4>Регистрация пользователя</h4>
-        <hr />
-        @Html.ValidationSummary(false)
-
-        <div>
-            Ник
-            <div>
-                @Html.EditorFor(model => model.UserName)
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Регистрация</h2>
             </div>
-        </div>
 
-        <div>
-            Пароль
-            <div>
-                @Html.EditorFor(model => model.Password)
-            </div>
-        </div>
+            <div class="panel-body">
 
-        <div>
-            Подтвердить пароль
-            <div>
-                @Html.EditorFor(model => model.ConfirmPassword)
-            </div>
-        </div>
+                @using (Html.BeginForm())
+            {
+                    @Html.AntiForgeryToken()
 
-        <div>
-            <div>
-                <input type="submit" value="Зарегистрировать" />
+                    <div>
+
+
+                        @Html.ValidationSummary(false)
+                        <div class="form-group">
+                            <label>Ник</label>
+                            <div>
+                                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Пароль</label>
+                            <div>
+                                @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Подтвердить пароль</label>
+                            <div>
+                                @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <input type="submit" class="btn btn-primary" value="Зарегистрировать" />
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
-}
+   
+
+</div>

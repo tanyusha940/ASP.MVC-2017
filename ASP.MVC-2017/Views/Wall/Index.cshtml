@@ -4,32 +4,72 @@
     ViewBag.Title = "Стены";
 }
 <h2> Стены </h2>
+@foreach (var wall in Model)
+{
 
-<table border="1" width="100%" cellpadding="5">
-
-            @foreach (var wall in Model)
+    <div class="row">
+        <div class="col-md-12 well">
+            <p>
+                <h4> Стена 
+                    @Html.DisplayFor(w => wall.Title)
+                создана
+                @Html.DisplayFor(w => wall.DateOfCreation)
+                пользователем   
+                @Html.DisplayFor(w => wall.User.UserName)
+            </h4>
+                    <hr>
+                @Html.DisplayFor(w => wall.Text)
+                <hr>
+                <span>Новый коментарий</span><br>
+                <textarea id="comment" rows="5" class="form-control"></textarea><br>
+                <button class="btn btn-primary" id="button" wallId="@wall.Id">Добавить</button>
+            </p>
+            @foreach (var comment in wall.Comments)
             {
-                <tr>
-                    <th>
-                        @Html.DisplayFor(w => wall.Title)<br>
+                <div class="">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Пользователь
+                            <strong>
+                                @Html.DisplayFor(c => comment.User.UserName)
+                            </strong> оставил комментарий 
+                            @Html.DisplayFor(c => comment.Date)
+                        </div>
+                        <div class="panel-body">
+                            @Html.DisplayFor(c => comment.Value)
+                        </div>
+                    </div>
 
-                        @Html.DisplayFor(w => wall.DateOfCreation)<br>
-                        @Html.DisplayFor(w => wall.User.UserName)<br>
+                </div>
+             }
+         </div>
+    </div>
+}
 
-                        @Html.DisplayFor(w => wall.Text)
-                    </th>
-                    @foreach (var comment in wall.Comments)
-                    {
-                    <tr>
-                        <th>
-                            @Html.DisplayFor(c => comment.Value)<br>
+@section scripts
+{
+    <script>
+        var button = document.getElementById('button');
+        button.addEventListener('click', function () {
+            var comment = document.getElementById('comment').value.replace(/<[^>]+>/g, '');
+            var wallId = document.getElementById('button').getAttribute('wallId');
+            console.log(wallId);
+            if (comment === '') {
+                return false;
+            }
+            AddComment(wallId, comment);
+        });
 
-                            @Html.DisplayFor(c => comment.Date)<br>
-                            @Html.DisplayFor(c => comment.User.UserName)<br>
-                        </th>
-                    </tr>
-                    }
-                </tr>
+        function AddComment(id, comment) {
+
+            $.ajax({
+                type: "POST",
+                url: "/Wall/AddComment",
+                data: { comment: encodeURIComponent(comment), wallId: id },
+                success: function (data) {
+                    location.reload();
+                }
+            })
         }
-</table>
-
+    </script>
+}

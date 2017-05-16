@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Личные данные</h2>
+<h2>@User.Identity.Name</h2>
     
         <p>Дата регистрации: @Html.DisplayFor(modelItem => Model.RegistrationDate) </p>
         <p>Количество созданных стен: @Html.DisplayFor(modelItem => Model.NumberOfWalls)</p>
