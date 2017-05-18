@@ -16,15 +16,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Создать стену","CreateWall", "Wall", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Стены", "Index", "Wall", new { area = "" }, new { @class = "navbar-brand" })           
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Стены", "Index", "Wall")</li>
+                    <li>@Html.ActionLink("Создать стену", "CreateWall", "Wall")</li>
                     <li>@Html.ActionLink("Мои стены", "GetUserWalls", "Wall")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+                </ul> 
+                
+                    @Html.Partial("_LoginPartial")
+                         
             </div>
+
         </div>
     </div>
     <div class="container body-content">
@@ -37,6 +40,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery-timeago")
     @RenderSection("scripts", required: false)
 </body>
 </html>

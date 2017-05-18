@@ -6,34 +6,45 @@
 
 <h2>Мои стены</h2>
 
-<table border="1" width="100%" cellpadding="5">
+@foreach (var wall in Model)
+{
+      <div class="row">
+            <div class="col-md-12 well">
+                <a id='delItem' class="pull-right" data-item='@wall.Id' onclick='DeleteItem(this)'><span class="glyphicon glyphicon-trash"></span></a>
+                <h4>
+                    @Html.DisplayFor(w => wall.Title)
+                    @Html.DisplayFor(w => wall.DateOfCreation)
+                    @Html.DisplayFor(w => wall.User.UserName)
+                </h4>
 
-    @foreach (var wall in Model)
-            {
-        <tr>
-            <th>
-                @Html.DisplayFor(w => wall.Title)<br>
+                <hr />
+                <p>
+                    @Html.DisplayFor(w => wall.Text) 
+                </p>
+                <div class="comments">
+                    @foreach (var comment in wall.Comments)
+                    {
+                        <div>
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <strong>
+                                        @Html.DisplayFor(c => comment.User.UserName)
+                                    </strong>оставил комментарий
+                                    <time class="pull-right timeago" datetime="@comment.Date.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")"></time>
+                                </div>
+                                <div class="comment-body">
+                                    @Html.DisplayFor(c => comment.Value)
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
 
-                @Html.DisplayFor(w => wall.DateOfCreation)<br>
-                @Html.DisplayFor(w => wall.User.UserName)<br>
-
-                @Html.DisplayFor(w => wall.Text)
-                <a id='delItem' data-item='@wall.Id' onclick='DeleteItem(this)' class="glyphicon glyphicon-trash" ></a>
-            </th>
-            @foreach (var comment in wall.Comments)
-            {
-            <tr>
-                <th>
-                    @Html.DisplayFor(c => comment.Value)<br>
-
-                    @Html.DisplayFor(c => comment.Date)<br>
-                    @Html.DisplayFor(c => comment.User.UserName)<br>
-                </th>
-            </tr>
-            }
-            </tr>
+               
+            </div>
+        </div>
     }
-</table>
+
 @section scripts
 {
     <script type="text/javascript">
@@ -48,7 +59,6 @@
                 location.reload();
             }
         })
-
     }
   
     // обработчик удаления

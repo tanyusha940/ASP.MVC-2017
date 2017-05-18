@@ -7,6 +7,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 30px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -16,4 +17,30 @@
     white-space: normal;
 }
 
+.well {
+    background: #fbfbfb;
+}
 
+.comment {
+    background: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: lightgray;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    display: inline-block;
+    text-align: left;
+}
+
+.comment .comment-body {
+    color: gray;
+}
+
+.comments {
+    text-align: right;
+}
+
+.timeago {
+    padding-left: 10px;
+}

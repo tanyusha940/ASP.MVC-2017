@@ -1,4 +1,5 @@
 ﻿@using ASP.MVC_2017.Models.Entities
+
 @model IEnumerable<Wall> 
 @{ 
     ViewBag.Title = "Стены";
@@ -10,66 +11,59 @@
     <div class="row">
         <div class="col-md-12 well">
             <p>
-                <h4> Стена 
-                    @Html.DisplayFor(w => wall.Title)
-                создана
-                @Html.DisplayFor(w => wall.DateOfCreation)
-                пользователем   
+                <h3>@Html.DisplayFor(w => wall.Title)</h3>
+                <h5>@Html.DisplayFor(w => wall.DateOfCreation)</h5>
+            <h4>                 
                 @Html.DisplayFor(w => wall.User.UserName)
             </h4>
-                    <hr>
-                @Html.DisplayFor(w => wall.Text)
-                <hr>
-                <span>Новый коментарий</span><br>
-                <textarea id="comment" rows="5" class="form-control"></textarea><br>
-                <button class="btn btn-primary" id="button" wallId="@wall.Id">Добавить</button>
-            </p>
-            @foreach (var comment in wall.Comments)
-            {
-                <div class="">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Пользователь
-                            <strong>
-                                @Html.DisplayFor(c => comment.User.UserName)
-                            </strong> оставил комментарий 
-                            @Html.DisplayFor(c => comment.Date)
-                        </div>
-                        <div class="panel-body">
-                            @Html.DisplayFor(c => comment.Value)
-                        </div>
+            <hr>
+            @Html.DisplayFor(w => wall.Text)
+            <hr>
+                </p>
+            <span>Новый коментарий</span><br>
+            <textarea id="comment" rows="5" class="form-control"></textarea><br>
+            <button class="btn btn-primary" id="button" wallId="@wall.Id">Добавить</button>
+
+            <div class="">
+                <p>
+                <div class="panel panel-primary">
+                    <div class="page">
+                         Количество комментариев: @Html.DisplayFor(w => wall.Comments.Count)
                     </div>
-
                 </div>
-             }
-         </div>
+                </p>
+            </div>
+        </div>
     </div>
+
 }
 
-@section scripts
+
+
+    @section scripts
 {
-    <script>
-        var button = document.getElementById('button');
-        button.addEventListener('click', function () {
-            var comment = document.getElementById('comment').value.replace(/<[^>]+>/g, '');
-            var wallId = document.getElementById('button').getAttribute('wallId');
-            console.log(wallId);
-            if (comment === '') {
-                return false;
-            }
-            AddComment(wallId, comment);
-        });
-
-        function AddComment(id, comment) {
-
-            $.ajax({
-                type: "POST",
-                url: "/Wall/AddComment",
-                data: { comment: encodeURIComponent(comment), wallId: id },
-                success: function (data) {
-                    location.reload();
+        <script>
+            var button = document.getElementById('button');
+            button.addEventListener('click', function () {
+                var comment = document.getElementById('comment').value.replace(/<[^>]+>/g, '');
+                var wallId = document.getElementById('button').getAttribute('wallId');
+                console.log(wallId);
+                if (comment === '') {
+                    return false;
                 }
-            })
-        }
-    </script>
-}
+                AddComment(wallId, comment);
+            });
+
+            function AddComment(id, comment) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Wall/AddComment",
+                    data: { comment: encodeURIComponent(comment), wallId: id },
+                    success: function (data) {
+                        location.reload();
+                    }
+                })
+            }
+        </script>
+    }

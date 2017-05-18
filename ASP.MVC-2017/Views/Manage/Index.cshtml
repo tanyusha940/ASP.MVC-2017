@@ -4,10 +4,28 @@
     ViewBag.Title = "Index";
 }
 
-<h2>@User.Identity.Name</h2>
-    
-        <p>Дата регистрации: @Html.DisplayFor(modelItem => Model.RegistrationDate) </p>
-        <p>Количество созданных стен: @Html.DisplayFor(modelItem => Model.NumberOfWalls)</p>
-        <p>Количество комментариев: @Html.DisplayFor(modelItem => Model.NumberOfComments)</p>
+<h2>Пользователь @User.Identity.Name</h2>
+  <table class="table table-striped">
+      <tr>
+          <td>Дата регистрации:</td>
+          <td>@Html.DisplayFor(modelItem => Model.RegistrationDate)</td>
+      </tr>
+      <tr>
+          <td>
+              Количество созданных стен:
+          </td>
+          <td>
+              @Html.DisplayFor(modelItem => Model.NumberOfWalls)
+          </td>
+      </tr>
+      <tr>
+          <td>
+              Количество комментариев: 
+          </td>
+          <td>
+              @Html.DisplayFor(modelItem => Model.NumberOfComments)
+          </td>
+      </tr>
+  </table>
 
 <br />

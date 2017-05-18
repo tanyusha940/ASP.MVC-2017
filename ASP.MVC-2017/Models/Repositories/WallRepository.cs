@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace ASP.MVC_2017.Models.Repositories
@@ -81,5 +82,32 @@ namespace ASP.MVC_2017.Models.Repositories
             }
            
         }
+        
+        //public async Task<IActionResult> Index(SortState sortOrder = SortState.CommentsAsc)
+        //{
+        //    IQueryable<Wall> walls = context.Walls.Include(x => x.Model);
+        //    ViewData["CommentSort"] = sortOrder == SortState.CommentsAsc ? SortState.CommentsDesc : SortState.CommentsAsc;
+        //    ViewData["DataSort"] = sortOrder == SortState.DateAsc ? SortState.DateDesc : SortState.DateAsc;
+
+        //    switch (sortOrder)
+        //    {
+        //        case SortState.CommentsDesc:
+        //            walls =walls.OrderByDescending(s => s.Comments);
+        //            break;
+        //        case SortState.CommentsAsc:
+        //            walls = walls.OrderBy(s => s.Comments);
+        //            break;
+        //        case SortState.DateDesc:
+        //            walls = walls.OrderByDescending(s => s.DateOfCreation);
+        //            break;
+        //        case SortState.DateAsc:
+        //            walls = walls.OrderBy(s => s.DateOfCreation);
+        //            break;
+
+        //    return View(await walls.AsNoTracking().ToListAsync());
+        //}
+    //}
+
+
     }
 }

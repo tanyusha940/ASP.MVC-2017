@@ -1,27 +1,34 @@
 ﻿@{
     ViewBag.Title = "AddWall";
 }
-<h2>Заполните стену </h2>
 
-<h2>AddWall</h2>
+<div class="row">
 
-@using (Html.BeginForm("CreateWall", "Wall", FormMethod.Post))
-{
-    
-    <table>
-        <tr>
-            <td><p>Введите заголовок: </p></td>
-            <td><input type="text" name="Title" /> </td>
-        </tr>
-        <tr>
-            <td><p>Введите текст: </p></td>
-            <td><input type="text" name="Text" /> </td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Save" /> </td>
-            <td></td>
-        </tr>
-    </table>
-}
+    @using (Html.BeginForm("CreateWall", "Wall", FormMethod.Post))
+    {
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <h2>Добавить стену</h2>
+
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>Введите заголовок: </label>
+                        <input type="text" name="Title" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Введите текст: </label>
+                        <textarea name="Text" class="form-control"></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Сохранить" />
+                </div>
+            </div>
+
+        </div>
 
 
+    }
+
+</div>
