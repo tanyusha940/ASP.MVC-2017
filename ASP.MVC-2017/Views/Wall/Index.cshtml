@@ -20,15 +20,15 @@
             @Html.DisplayFor(w => wall.Text)
             <hr>
                 </p>
-            <span>Новый коментарий</span><br>
-            <textarea id="comment" rows="5" class="form-control"></textarea><br>
-            <button class="btn btn-primary" id="button" wallId="@wall.Id">Добавить</button>
+        
 
             <div class="">
                 <p>
                 <div class="panel panel-primary">
                     <div class="page">
                          Количество комментариев: @Html.DisplayFor(w => wall.Comments.Count)
+                        @Html.ActionLink("Перейти к комментариям", "Show", "Wall", new { id = wall.Id }, new { @class = "pull-right" })
+                        
                     </div>
                 </div>
                 </p>
@@ -37,33 +37,3 @@
     </div>
 
 }
-
-
-
-    @section scripts
-{
-        <script>
-            var button = document.getElementById('button');
-            button.addEventListener('click', function () {
-                var comment = document.getElementById('comment').value.replace(/<[^>]+>/g, '');
-                var wallId = document.getElementById('button').getAttribute('wallId');
-                console.log(wallId);
-                if (comment === '') {
-                    return false;
-                }
-                AddComment(wallId, comment);
-            });
-
-            function AddComment(id, comment) {
-
-                $.ajax({
-                    type: "POST",
-                    url: "/Wall/AddComment",
-                    data: { comment: encodeURIComponent(comment), wallId: id },
-                    success: function (data) {
-                        location.reload();
-                    }
-                })
-            }
-        </script>
-    }

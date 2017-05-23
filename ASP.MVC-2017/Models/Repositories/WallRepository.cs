@@ -37,6 +37,11 @@ namespace ASP.MVC_2017.Models.Repositories
             return context.Walls.ToList();
         }
 
+        public Wall GetWall(int id)
+        {
+            return context.Walls.Where(w => w.Id == id).First();
+        }
+
         public List<Wall> GetUserWalls(string userId)
         {
             return context.Walls.Where(w => w.UserId == userId).ToList();

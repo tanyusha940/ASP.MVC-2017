@@ -1,0 +1,77 @@
+﻿@using ASP.MVC_2017.Models.Entities
+@model Wall
+@{
+    ViewBag.Title = "Show";
+}
+
+<div class="row">
+    <div class="col-md-12 well">
+        <a id='delItem' class="pull-right" data-item='@Model.Id' onclick='DeleteItem(this)'><span class="glyphicon glyphicon-trash"></span></a>
+        <h4>
+            @Html.DisplayFor(w => Model.Title)
+            @Html.DisplayFor(w => Model.DateOfCreation)
+            @Html.DisplayFor(w => Model.User.UserName)
+        </h4>
+
+        <hr />
+        <p>
+            @Html.DisplayFor(w => Model.Text)
+        </p>
+        <hr/>
+
+        <span>Новый коментарий</span><br>
+        <textarea id="comment" rows="5" class="form-control"></textarea><br>
+        <button class="btn btn-primary" id="button" wallId="@Model.Id">Добавить</button>
+
+        <div class="comments">
+            @foreach (var comment in Model.Comments)
+            {
+                <div>
+                    <div class="comment">
+                        <div class="comment-header">
+                            <strong>
+                                @Html.DisplayFor(c => comment.User.UserName)
+                            </strong>оставил комментарий
+                            <time class="pull-right timeago" datetime="@comment.Date.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")"></time>
+                        </div>
+                        <div class="comment-body">
+                            @Html.DisplayFor(c => comment.Value)
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+
+    var button = document.getElementById('button');
+    button.addEventListener('click', function () {
+        var comment = document.getElementById('comment').value.replace(/<[^>]+>/g, '');
+        var wallId = document.getElementById('button').getAttribute('wallId');
+        console.log(wallId);
+        if (comment === '') {
+            return false;
+        }
+        AddComment(wallId, comment);
+    });
+
+    function AddComment(id, comment) {
+
+        $.ajax({
+            type: "POST",
+            url: "/Wall/AddComment",
+            data: { comment: encodeURIComponent(comment), wallId: id },
+            success: function (data) {
+                location.reload();
+            }
+        })
+    }
+    </script>
+}

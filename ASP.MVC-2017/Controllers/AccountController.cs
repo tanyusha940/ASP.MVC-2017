@@ -160,7 +160,7 @@ namespace ASP.MVC_2017.Controllers
                     if (res.Result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Wall");
                     }
                 }
                 AddErrors(result);
@@ -390,7 +390,7 @@ namespace ASP.MVC_2017.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Wall");
         }
 
         //
@@ -447,7 +447,7 @@ namespace ASP.MVC_2017.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Wall");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
