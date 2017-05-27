@@ -16,10 +16,12 @@ namespace ASP.MVC_2017.Models
         public int NumberOfInvitations { get; set; }
         public ICollection<Wall> Walls { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<Report> Reports { get; set; }
         public ApplicationUser()
         {
             Walls = new List<Wall>();
             Comments = new List<Comment>();
+            Reports = new List<Report>();
         }
 
 
@@ -43,6 +45,7 @@ namespace ASP.MVC_2017.Models
 
         public DbSet<Wall> Walls { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Report> Reports { get; set; }
 
         public static ApplicationDbContext Create()
         {

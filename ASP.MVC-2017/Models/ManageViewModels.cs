@@ -46,7 +46,7 @@ namespace ASP.MVC_2017.Models
     public class ChangePasswordViewModel
     {
         [Required]
-        [DataType(DataType.Password)]
+        [DataType(DataType.Password)]   
         [Display(Name = "Current password")]
         public string OldPassword { get; set; }
 

@@ -12,7 +12,7 @@ namespace ASP.MVC_2017.Controllers
     public class WallController : Controller
     {
         private readonly WallRepository _wallRepository;
-
+        
         public WallController()
         {
             _wallRepository = new WallRepository();

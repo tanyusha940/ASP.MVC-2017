@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Жалобы</h2>
+
+@foreach (var report in Model)
+{
+    <tr>
+        <td>@report.Date</td>
+        <td>@report.user.name</td>
+        <td>@Html.ActionLink("Перейти к комментарию", "Index", "Comment")</td>
+    </tr>
+}

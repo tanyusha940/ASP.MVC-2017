@@ -37,6 +37,7 @@
                         <div class="comment-body">
                             @Html.DisplayFor(c => comment.Value)
                         </div>
+                        @Html.ActionLink("Пожаловаться", "CreatingReport", "Report", new { commentId = comment.Id}, null)
                     </div>
                 </div>
             }
@@ -67,7 +68,7 @@
         $.ajax({
             type: "POST",
             url: "/Wall/AddComment",
-            data: { comment: encodeURIComponent(comment), wallId: id },
+            data: { comment: comment, wallId: id },
             success: function (data) {
                 location.reload();
             }

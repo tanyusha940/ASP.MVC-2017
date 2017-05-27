@@ -9,7 +9,7 @@ namespace ASP.MVC_2017.Models.Entities
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public DateTime ?DateOfCreation { get; set; }
+        public DateTime? DateOfCreation { get; set; }
         public string Text { get; set; }
 
         public string UserId { get; set; }
