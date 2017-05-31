@@ -34,7 +34,10 @@ namespace ASP.MVC_2017.Models.Repositories
             {
                 RegistrationDate = user.RegistrationDate,
                 NumberOfComments = context.Comments.Where(c => c.UserId == user.Id).Count(),
-                NumberOfWalls = context.Walls.Where(w => w.UserId == user.Id).Count()
+                NumberOfWalls = context.Walls.Where(w => w.UserId == user.Id).Count(),
+                Name = user.Name,
+                SurName = user.SurName,
+                Email = user.Email
             };
             return userInformation;
         }

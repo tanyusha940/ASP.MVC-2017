@@ -1,6 +1,18 @@
-﻿
+﻿@using ASP.MVC_2017.Models.Entities
+@model Report
 @{
     ViewBag.Title = "CreatingReport";
 }
+<div class="row">
 
+    @using (Html.BeginForm("CreateReport", "Report", FormMethod.Post))
+    {
+        <h2>Опишите жалобу</h2>
+        <div class="form-group">
+            <textarea type="text" name="Text" class="form-control" ></textarea>
+            <input type="hidden" name="CommentId" value="@ViewBag.CommentId" />
+        </div>
+        <input type="submit" class="btn btn-primary" value="Отправить" />
+    }
 
+</div>

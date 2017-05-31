@@ -21,6 +21,24 @@
 
                         @Html.ValidationSummary(false)
                         <div class="form-group">
+                            <label>Имя</label>
+                            <div>
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Фамилия</label>
+                            <div>
+                                @Html.TextBoxFor(model => model.SurName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <div>
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label>Логин</label>
                             <div>
                                 @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
@@ -28,14 +46,14 @@
                         </div>
                         <div class="form-group">
                             <label>Пароль</label>
-                            <div>
-                                @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                            <div class="">
+                                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Подтвердить пароль</label>
                             <div>
-                                @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
                             </div>
                         </div>
                         <div>

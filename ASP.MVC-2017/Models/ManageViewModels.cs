@@ -16,6 +16,10 @@ namespace ASP.MVC_2017.Models
         public DateTime? RegistrationDate { get; set; }
         public int NumberOfWalls { get; set; }
         public int NumberOfComments { get; set; }
+        public string Name { get; set; }
+        public string SurName { get; set; }
+        public string Email { get; set; }
+
     }
 
     public class ManageLoginsViewModel
@@ -32,9 +36,9 @@ namespace ASP.MVC_2017.Models
     public class SetPasswordViewModel
     {
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(50, ErrorMessage = "Длинная пароля должна быть от 6 до 50 символов", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Новый пароль")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]

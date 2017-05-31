@@ -49,7 +49,7 @@ namespace ASP.MVC_2017.Models
 
     public class LoginViewModel
     {
-        [Required]
+        [Required ]
         [Display(Name = "Login")]
 
         public string Login { get; set; }
@@ -66,10 +66,26 @@ namespace ASP.MVC_2017.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Логин")]
         public string UserName { get; set; }
 
         [Required]
+        [Display(Name = "Имя")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Фамилия")]
+        public string SurName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "Длинная пароля должна быть от 6 до 50 символов", MinimumLength = 6)]
         [DataType(DataType.Password)]
+        [Display(Name = "Пароль")]
         public string Password { get; set; }
 
         [Required]

@@ -23,7 +23,7 @@ namespace ASP.MVC_2017.Models
             roleManager.Create(role2);
 
             // создаем пользователей
-            var user = new ApplicationUser { Email = "test@mail.ru", UserName = "test", Id = "ba47eb41-7d0a-4012-8023-4418ced312c3", EmailConfirmed = true, RegistrationDate = DateTime.Now.AddMonths(-1) };
+            var user = new ApplicationUser { Email = "test@mail.ru", UserName = "test", Id = "ba47eb41-7d0a-4012-8023-4418ced312c3", EmailConfirmed = true, RegistrationDate = DateTime.Now.AddMonths(-1), NumberOfInvitations = 5 , Name = "Тестовые" , SurName = "Данные" };
             string password = "Qwerty_1234";
             var result = userManager.Create(user, password);
 
@@ -40,7 +40,7 @@ namespace ASP.MVC_2017.Models
                 Id = 1,
                 Title = "Title_1",
                 Text = "Text_1",
-                DateOfCreation = DateTime.Now.AddDays(-1),
+                DateOfCreation = DateTime.Now,
                 UserId = "ba47eb41-7d0a-4012-8023-4418ced312c3"
             };
             Wall wall_2 = new Wall

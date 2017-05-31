@@ -1,15 +1,20 @@
-﻿
+﻿@using ASP.MVC_2017.Models.Entities
+@model IEnumerable<Report>
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Жалобы</h2>
-
-@foreach (var report in Model)
-{
-    <tr>
-        <td>@report.Date</td>
-        <td>@report.user.name</td>
-        <td>@Html.ActionLink("Перейти к комментарию", "Index", "Comment")</td>
-    </tr>
-}
+<table class="table table-striped">
+    @foreach (var report in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(c => report.Comment.Value)</td>
+            <td>@Html.DisplayFor(r => report.Text)</td>
+            <td>@Html.DisplayFor(r => report.Date)</td>
+            <td>@Html.DisplayFor(r => report.User.UserName)</td>
+            <br>
+        </tr>
+    }
+</table>

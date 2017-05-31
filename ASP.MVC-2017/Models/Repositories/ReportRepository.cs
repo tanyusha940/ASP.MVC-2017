@@ -21,18 +21,22 @@ namespace ASP.MVC_2017.Models.Repositories
 
         public void CreateReport(CreateReportViewModels model)
         {
-            var wall = context.Walls.Where(w => w.Id == model.WallId).FirstOrDefault();
-            if (wall != null)
+            var comment = context.Comments.Where(c => c.Id == model.CommentId).FirstOrDefault();
+            if (comment != null)
             {
-                Report report = new Report
+                var wall = context.Walls.Where(w => w.Id == comment.WallId).FirstOrDefault();
+                if (wall != null)
                 {
-                    CommentId = model.CommentId,
-                    UserId = model.UserId,
-                    Date = DateTime.Now,
-                    Text = model.Text
-                };
-                context.Reports.Add(report);
-                context.SaveChanges();
+                    Report report = new Report
+                    {
+                        CommentId = model.CommentId,
+                        UserId = model.UserId,
+                        Date = DateTime.Now,
+                        Text = model.Text
+                    };
+                    context.Reports.Add(report);
+                    context.SaveChanges();
+                }
             }
         }
     }

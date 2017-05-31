@@ -9,7 +9,6 @@ namespace ASP.MVC_2017.ViewModels
     {
         public string Text { get; set; }
         public int CommentId { get; set; }
-        public int WallId { get; set; }
         public string UserId { get; set; }
     }
 }

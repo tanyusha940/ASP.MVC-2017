@@ -29,7 +29,7 @@ namespace ASP.MVC_2017.Controllers
         public ActionResult CreateReport(CreateReportViewModels model)
         {
             _reportRepository.CreateReport(model);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Wall");
         }
 
         public ActionResult CreatingReport(int commentId)
