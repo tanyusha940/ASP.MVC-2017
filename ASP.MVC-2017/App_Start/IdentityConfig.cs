@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -19,7 +20,6 @@ namespace ASP.MVC_2017
     {
         public Task SendAsync(IdentityMessage message)
         {
-            return Task.FromResult(0);
             // настройка логина, пароля отправителя
             var from = "KP.Robot@yandex.ru";
             var pass = "Qwerty_1234";

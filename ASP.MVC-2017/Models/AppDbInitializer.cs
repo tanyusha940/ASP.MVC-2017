@@ -40,7 +40,7 @@ namespace ASP.MVC_2017.Models
                 Id = 1,
                 Title = "Title_1",
                 Text = "Text_1",
-                DateOfCreation = DateTime.Now,
+                DateOfCreation = DateTime.Now.AddDays(-5),
                 UserId = "ba47eb41-7d0a-4012-8023-4418ced312c3"
             };
             Wall wall_2 = new Wall
@@ -48,7 +48,7 @@ namespace ASP.MVC_2017.Models
                 Id = 2,
                 Title = "Title_2",
                 Text = "Text_2",
-                DateOfCreation = DateTime.Now,
+                DateOfCreation = DateTime.Now.AddDays(-4),
                 UserId = "ba47eb41-7d0a-4012-8023-4418ced312c3"
             };
             Wall wall_3 = new Wall
@@ -56,7 +56,7 @@ namespace ASP.MVC_2017.Models
                 Id = 3,
                 Title = "Title_3",
                 Text = "Text_3",
-                DateOfCreation = DateTime.Now.AddHours(-1),
+                DateOfCreation = DateTime.Now.AddMonths(-1),
                 UserId = "ba47eb41-7d0a-4012-8023-4418ced312c3"
             };
             context.Walls.Add(wall_1);

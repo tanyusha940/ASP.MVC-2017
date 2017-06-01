@@ -20,6 +20,8 @@ namespace ASP.MVC_2017.Models
         public ICollection<Wall> Walls { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Report> Reports { get; set; }
+        public byte[] ImageData { get; set; }
+        public string ImageMimeType { get; set; }
         public ApplicationUser()
         {
             Walls = new List<Wall>();

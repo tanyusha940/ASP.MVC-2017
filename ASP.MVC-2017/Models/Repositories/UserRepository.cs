@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ASP.MVC_2017.Models.Repositories
 {
@@ -27,6 +28,17 @@ namespace ASP.MVC_2017.Models.Repositories
             GC.SuppressFinalize(this);
         }
 
+        public void UpdateUser(ApplicationUser user)
+        {
+            var oldUser = context.Users.Where(u => u.Id == user.Id).FirstOrDefault();
+            if(oldUser != null)
+            {
+                oldUser.ImageData = user.ImageData;
+                oldUser.ImageMimeType = user.ImageMimeType;
+                context.SaveChanges();
+            }
+        }
+
         public IndexViewModel GetUserInformation(string userId)
         {
             var user = GetUser(userId);
@@ -37,7 +49,9 @@ namespace ASP.MVC_2017.Models.Repositories
                 NumberOfWalls = context.Walls.Where(w => w.UserId == user.Id).Count(),
                 Name = user.Name,
                 SurName = user.SurName,
-                Email = user.Email
+                Email = user.Email,
+                ImageData = user.ImageData,
+                ImageMimeType = user.ImageMimeType
             };
             return userInformation;
         }

@@ -52,6 +52,8 @@ namespace ASP.MVC_2017.Models.Repositories
             var wall = context.Walls.Where(w => w.Id == id).FirstOrDefault();
             if (wall != null)
             {
+                DeleteWallReports(wall.Id);
+                DeleteWallComments(wall.Id);
                 context.Walls.Remove(wall);
                 context.SaveChanges();
             }
@@ -87,7 +89,27 @@ namespace ASP.MVC_2017.Models.Repositories
             }
            
         }
-        
+
+        public void DeleteWallReports(int wallId)
+        {
+            var reports = context.Reports.Where(r => r.Comment.WallId == wallId);
+            if (reports != null)
+            {
+                context.Reports.RemoveRange(reports);
+                context.SaveChanges();
+            }
+        }
+
+        public void DeleteWallComments(int wallId)
+        {
+            var comments = context.Comments.Where(c => c.Wall.Id == wallId);
+            if(comments != null)
+            {
+                context.Comments.RemoveRange(comments);
+                context.SaveChanges();
+            }
+        }
+
         //public async Task<IActionResult> Index(SortState sortOrder = SortState.CommentsAsc)
         //{
         //    IQueryable<Wall> walls = context.Walls.Include(x => x.Model);
@@ -111,7 +133,7 @@ namespace ASP.MVC_2017.Models.Repositories
 
         //    return View(await walls.AsNoTracking().ToListAsync());
         //}
-    //}
+        //}
 
 
     }

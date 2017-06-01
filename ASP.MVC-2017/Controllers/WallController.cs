@@ -21,7 +21,8 @@ namespace ASP.MVC_2017.Controllers
         // GET: Wall
         public ActionResult Index()
         {
-            var walls = _wallRepository.GetAllWalls();
+            //var walls = _wallRepository.GetAllWalls().OrderByDescending(w => w.DateOfCreation);
+            var walls = _wallRepository.GetAllWalls().OrderByDescending(w => w.Comments.Count);
             return View(walls);
         }
 

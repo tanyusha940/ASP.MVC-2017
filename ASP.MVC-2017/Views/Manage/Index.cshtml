@@ -1,118 +1,190 @@
-﻿@model ASP.MVC_2017.Models.IndexViewModel
+﻿@using Microsoft.AspNet.Identity;
+@model ASP.MVC_2017.Models.IndexViewModel
 
 @{
     ViewBag.Title = "Index";
 }
-<link rel="stylesheet" type="text/css" href="~/Scripts/Collage/component.css" />
-<link rel="stylesheet" type="text/css" href="~/Scripts/Collage/default.css" />
-<div class="jumbotron">
-    <form action="~/Home/SaveUploadedFile" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm">
-        <div class="fallback">
-            <input name="file" type="file" multiple />
-            <input type="submit" value="Upload" />
+<link  type="text/css" href="~/Scripts/Collage/component.css" />
+<link  type="text/css" href="~/Scripts/Collage/default.css" />
+
+@using (Html.BeginForm("AddAvatar", "User",
+                    FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="panel-body">
+        <div class="form-group">
+            <div style="position:relative;">
+                <label>Картинка</label>
+                <a class='btn' href='javascript:;'>
+                    Выберите файл...
+                    <input type="file" name="Image" size="40" accept="image/x-png,image/gif,image/jpeg"
+                           style="position:absolute;z-index:2;top:0;
+                                left:0;filter: alpha(opacity=0); opacity:0;
+                                background-color:transparent;color:transparent;"
+                           onchange='$("#upload-file-info").html($(this).val());'>
+                </a>
+                <span class='label label-info' id="upload-file-info"></span>
+            </div>
+            @if (Model.ImageData == null)
+                {
+                <div class="form-control-static">Нет картинки</div>
+            }
+            else
+            {
+                <img class="img-thumbnail" width="150" height="150"
+                     src="@Url.Action("GetImage", "User",
+                        new { })" />
+            }
         </div>
-    </form>
-</div>
-<div id="imageList" class="jumbotron" style="width: 100%;">
-    @*@using (Ajax.BeginForm("DragImagesNew", new AjaxOptions { UpdateTargetId = "results", LoadingElementId = "loading" }))
-    {
-        <input type="submit" id="qwer" value="Обновить" style="display: none;" />
-    }*@
-    <div id="loading" style="display: none;">
-        <h3>Refresh...</h3>
     </div>
-    <div id="results"></div>
-</div>
-    <h2>Пользователь @User.Identity.Name</h2>
-    <table class="table table-striped">
-        <tr>
-            <td>Имя:</td>
-            <td>@Html.DisplayFor(modelItem => Model.Name)</td>
-        </tr>
-        <tr>
-            <td>Фамилия:</td>
-            <td>@Html.DisplayFor(modelItem => Model.SurName)</td>
-        </tr>
-        <tr>
-            <td>Email:</td>
-            <td>@Html.DisplayFor(modelItem => Model.Email)</td>
-        </tr>
-        <tr>
-            <td>Дата регистрации:</td>
-            <td>@Html.DisplayFor(modelItem => Model.RegistrationDate)</td>
-        </tr>
-        <tr>
-            <td>
-                Количество созданных стен:
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => Model.NumberOfWalls)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Количество комментариев:
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => Model.NumberOfComments)
-            </td>
-        </tr>
-    </table>
+        <div class="panel-footer">
+            <input type="submit" value="Сохранить" class="btn btn-primary" />
+        </div>
+}
 
-    <br />
-<style type="text/css">
-    .dz-max-files-reached {
-        background-color: red;
-    }
-</style>
-@section scripts{
-    <script type="text/javascript">
-        $('#qwer').click();
-        $('#qwerty').click(function () {
-            console.log("delete1");
-            $('#qwer').click();
-            console.log("delete2");
-        });
-        function funcDelete() {
-            console.log("delete2");
-            setTimeout(function () { $('#qwer').click() }, 500);
-        }
-        //File Upload response from the server
-        Dropzone.options.dropzoneForm = {
-            maxFiles: 10,
-            success: function(file, response) {
-                $('#qwer').click();
-            },
-            init: function() {
-                this.on("maxfilesexceeded", function(data) {
-                    var res = eval('(' + data.xhr.responseText + ')');
 
+        <h2>Пользователь @User.Identity.Name</h2>
+        <table class="table table-striped">
+            <tr>
+                <td>Имя:</td>
+                <td>@Html.DisplayFor(modelItem => Model.Name)</td>
+            </tr>
+            <tr>
+                <td>Фамилия:</td>
+                <td>@Html.DisplayFor(modelItem => Model.SurName)</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>@Html.DisplayFor(modelItem => Model.Email)</td>
+            </tr>
+            <tr>
+                <td>Дата регистрации:</td>
+                <td>@Html.DisplayFor(modelItem => Model.RegistrationDate)</td>
+            </tr>
+            <tr>
+                <td>
+                    Количество созданных стен:
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.NumberOfWalls)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Количество комментариев:
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.NumberOfComments)
+                </td>
+            </tr>
+        </table>
+
+        <br />
+        <style type="text/css">
+            .dz-max-files-reached {
+                background-color: red;
+            }
+        </style>
+        @section scripts{
+            <script type="text/javascript">
+                var files;
+
+                // Вешаем функцию на событие
+                // Получим данные файлов и добавим их в переменную
+
+                $('input[type=file]').change(function () {
+                    files = this.files;
                 });
-                this.on("addedfile", function(file) {
+                $('.submit.button').click(function (event) {
+                    event.stopPropagation(); // Остановка происходящего
+                    event.preventDefault();  // Полная остановка происходящего
 
-                    // Create the remove button
-                    var removeButton = Dropzone.createElement("<button>Remove file</button>");
+                    // Создадим данные формы и добавим в них данные файлов из files
 
-
-                    // Capture the Dropzone instance as closure.
-                    var _this = this;
-
-                    // Listen to the click event
-                    removeButton.addEventListener("click", function(e) {
-                        // Make sure the button click doesn't submit the form:
-                        e.preventDefault();
-                        e.stopPropagation();
-                        // Remove the file preview.
-                        _this.removeFile(file);
-                        // If you want to the delete the file on the server as well,
-                        // you can do the AJAX request here.
+                    var data = new FormData();
+                    $.each(files, function (key, value) {
+                        data.append(key, value);
                     });
 
-                    // Add the button to the file preview element.
-                    file.previewElement.appendChild(removeButton);
-                    //window.location.replace("/Home/UploadImage");
+                    // Отправляем запрос
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/user/AddAvatar",
+                        data: data,
+                        cache: false,
+                        dataType: 'json',
+                        processData: false, // Не обрабатываем файлы (Don't process the files)
+                        contentType: false, // Так jQuery скажет серверу что это строковой запрос
+                        success: function (respond, textStatus, jqXHR) {
+
+                            // Если все ОК
+
+                            if (typeof respond.error === 'undefined') {
+                                // Файлы успешно загружены, делаем что нибудь здесь
+
+                                // выведем пути к загруженным файлам в блок '.ajax-respond'
+
+                                var files_path = respond.files;
+                                var html = '';
+                                $.each(files_path, function (key, val) { html += val + '<br>'; })
+                                $('.ajax-respond').html(html);
+                            }
+                            else {
+                                console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log('ОШИБКИ AJAX запроса: ' + textStatus);
+                        }
+                    });
+
                 });
-            }
-        };
-    </script>
-}
+                $('#qwer').click();
+                $('#qwerty').click(function () {
+                    console.log("delete1");
+                    $('#qwer').click();
+                    console.log("delete2");
+                });
+                function funcDelete() {
+                    console.log("delete2");
+                    setTimeout(function () { $('#qwer').click() }, 500);
+                }
+                //File Upload response from the server
+                Dropzone.options.dropzoneForm = {
+                    maxFiles: 10,
+                    success: function (file, response) {
+                        $('#qwer').click();
+                    },
+                    init: function () {
+                        this.on("maxfilesexceeded", function (data) {
+                            var res = eval('(' + data.xhr.responseText + ')');
+
+                        });
+                        this.on("addedfile", function (file) {
+
+                            // Create the remove button
+                            var removeButton = Dropzone.createElement("<button>Remove file</button>");
+
+
+                            // Capture the Dropzone instance as closure.
+                            var _this = this;
+
+                            // Listen to the click event
+                            removeButton.addEventListener("click", function (e) {
+                                // Make sure the button click doesn't submit the form:
+                                e.preventDefault();
+                                e.stopPropagation();
+                                // Remove the file preview.
+                                _this.removeFile(file);
+                                // If you want to the delete the file on the server as well,
+                                // you can do the AJAX request here.
+                            });
+
+                            // Add the button to the file preview element.
+                            file.previewElement.appendChild(removeButton);
+                            //window.location.replace("/Home/UploadImage");
+                        });
+                    }
+                };
+            </script>
+        }
